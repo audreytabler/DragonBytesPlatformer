@@ -1,0 +1,34 @@
+.ButtonHoverStyle:hover {
+    opacity: 1;
+}
+
+Button:hover {
+    opacity: 1;
+    /*background-color: blue;*/
+}
+
+.bubble_style {
+    width: 400px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 40px;
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Electronic%20Highway%20Sign.TTF?fileID=12800000&guid=8a2b9e2a607dd2143b58c44bc32410b4&type=3#Electronic Highway Sign');
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(185, 96, 81, 0.53);
+    transition-property: opacity;
+    transition-duration: 0.05s;
+    transition-timing-function: ease-in;
+    transition-delay: 0s;
+    justify-content: center;
+    align-items: center;
+    background-image: none;
+    opacity: 0.8;
+}

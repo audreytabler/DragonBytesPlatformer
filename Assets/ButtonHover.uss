@@ -1,0 +1,9 @@
+.ButtonHoverStyle:hover {
+    opacity: 1;
+}
+
+Button:hover {
+    opacity: 1;
+}
+
+

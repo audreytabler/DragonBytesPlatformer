@@ -1,0 +1,7 @@
+
+.Enter_Name_style > .unity-base-field__input{
+	background-color: #A85252;
+	text-color: #FFFFFF;
+}
+
+/*A85252*/

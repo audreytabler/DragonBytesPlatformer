@@ -1,0 +1,26 @@
+Audrey
+Why hello there
+
+{name}
+Hi This is newer text! woah!
+
+Annie
+Hey player! Let's see if you can make a selection!
+
+???
+-30
+%hey! Option 1 here!
+~why henlo there here is an option2
+*This is a fun button
+???
+
+Annie
+Oh how fun! You finished selecting a thing!
+
+===
+
+Annie
+Yay!
+
+{name} 
+If all went according to plan, this should be a new dialogue box!
