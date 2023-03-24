@@ -1,12 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style src="project://database/Assets/Editor%20Default%20Resources/ButtonHoverStyle.uss?fileID=7433441132597879392&amp;guid=fa8951026219e444f929d7ab384b7656&amp;type=3#ButtonHoverStyle" />
-    <Style src="project://database/Assets/ButtonHover.uss?fileID=7433441132597879392&amp;guid=e5e5693b1eac20d499cd79dd92ebabec&amp;type=3#ButtonHover" />
-    <ui:VisualElement name="Shadow" style="height: 356px; background-color: rgba(20, 18, 24, 0.4); display: flex; visibility: visible;">
-        <ui:VisualElement name="BorderBox" style="height: 247px; width: 621px; margin-left: 30px; align-items: center; justify-content: center; opacity: 1; display: flex;">
-            <ui:Button text="Choice1" display-tooltip-when-elided="true" name="Choice1" class="ButtonHoverStyle bubble_style" />
-            <ui:Button text="Choice2" display-tooltip-when-elided="true" name="Choice2" class="ButtonHoverStyle bubble_style" />
-            <ui:Button text="Choice2" display-tooltip-when-elided="true" name="Choice3" class="ButtonHoverStyle bubble_style" />
-            <ui:Button text="Choice2" display-tooltip-when-elided="true" name="Choice4" class="ButtonHoverStyle bubble_style" />
+    <Style src="project://database/Assets/UI/ButtonHover.uss?fileID=7433441132597879392&amp;guid=e5e5693b1eac20d499cd79dd92ebabec&amp;type=3#ButtonHover" />
+    <ui:VisualElement name="Shadow" style="height: 356px; background-color: rgba(20, 18, 24, 0); display: flex; visibility: visible;">
+        <ui:VisualElement name="BorderBox" style="height: 247px; width: 749px; margin-left: 30px; align-items: center; justify-content: flex-end; opacity: 1; display: flex;">
+            <ui:Button text="Choice1" display-tooltip-when-elided="true" name="Choice1" class="ButtonHoverStyle bubble_style" style="flex-wrap: nowrap; flex-direction: column-reverse;" />
+            <ui:Button text="Choice2" display-tooltip-when-elided="true" name="Choice2" class="ButtonHoverStyle bubble_style" style="visibility: visible; display: flex;" />
+            <ui:Button text="Choice3" display-tooltip-when-elided="true" name="Choice3" class="ButtonHoverStyle bubble_style" />
+            <ui:Button text="Choice4" display-tooltip-when-elided="true" name="Choice4" class="ButtonHoverStyle bubble_style" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
