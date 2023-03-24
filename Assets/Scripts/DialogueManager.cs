@@ -153,7 +153,7 @@ public class DialogueManager : MonoBehaviour
         instance.currentStory.ChooseChoiceIndex(choiceIndex);
        // instance.currentStory.currentChoices.Clear();
         instance.ContinueStory();
-        return;
+        
 
     }
 
