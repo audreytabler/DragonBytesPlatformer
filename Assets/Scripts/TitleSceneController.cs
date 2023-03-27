@@ -11,10 +11,16 @@ public class TitleSceneController : MonoBehaviour
     // Start is called before the first frame update
     Button start;
     TextField playerNameIn;
-   
+    private int hi = 0;
+
+    private void Awake()
+    {
+
+    }
     void OnEnable()
     {
-        //SceneManager.LoadScene("Start_Menu");
+        
+        
 
         Debug.Log("scriptRan");
 
@@ -39,6 +45,8 @@ public class TitleSceneController : MonoBehaviour
             SceneManager.LoadScene("Platformer_Scene");
 
             PlayerName = playerNameIn.text;
+
+            //FindObjectOfType<StartDialogue>().startFirstScene();
         }
         else
             Debug.Log("Please enter a name before pressing start");

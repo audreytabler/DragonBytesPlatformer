@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Label = UnityEngine.UIElements.Label;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
+using System.IO;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class DialogueManager : MonoBehaviour
     [Header("Sprite")]
     [SerializeField] GameObject sprite;
 
+    [Header("ClassroomScene")]
+    [SerializeField] GameObject classScene;
+
 
     private Story currentStory;
     private string[] choicesText;
@@ -29,8 +33,9 @@ public class DialogueManager : MonoBehaviour
     public Label nameText;
     public Button messageBox;
     bool isTyping = false;
+    bool missionInProgress = false;
 
-
+    //currentStory.TagsForContentAtPath("your_knot") ... calling a certain knot in story
     private void Awake()
     {
         if (instance != null)
@@ -62,36 +67,48 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         dialogueIsPlaying = false;
-        messageBox.visible = false;
-        nameBox.visible = false;
+       // messageBox.visible = false;
+        //nameBox.visible = false;
+        isTyping = false;
 
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
-        currentStory = new Story(inkJSON.text);
-        nameText.text = (string)currentStory.variablesState["charName"];
-        StartCoroutine(fadeInChat());
-        dialogueIsPlaying = true;
+        if (!isTyping)
+        {
+            messageBox.visible = true;
+            nameBox.visible = true;
+            nameText.visible = true;
+            currentStory = new Story(inkJSON.text);
+            nameText.text = (string)currentStory.variablesState["charName"];
+            StartCoroutine(fadeInChat());
+            dialogueIsPlaying = true;
 
+            //currentStory.variablesState["classTime"] = missionManager.classTime;
+            inkMethodSetting();
 
-        ContinueStory();
-
+            StartCoroutine(TypeSentence(currentStory.Continue()));
+        }
     }
 
     private void ContinueStory()
     {
-        if (currentStory.canContinue)
+        if (!isTyping)
         {
-            StartCoroutine(TypeSentence(currentStory.Continue()));
-            
+            if (currentStory.canContinue)
+            {
+                StartCoroutine(TypeSentence(currentStory.Continue()));
+            }
+            else
+                StartCoroutine(fadeOutChat());
         }
-        else
-            StartCoroutine(fadeOutChat());
     }
 
     IEnumerator TypeSentence(string sentence)
     {
+        //StopAllCoroutines()
+        nameText.text = (string)currentStory.variablesState["charName"];
         isTyping = true;
         messageBox.text = "";
         foreach (char character in sentence.ToCharArray())
@@ -107,8 +124,9 @@ public class DialogueManager : MonoBehaviour
     IEnumerator fadeInChat()
     {
         messageBox.visible = true;
+        nameBox.visible = true;
         nameText.visible = true;
-        isTyping = true;
+        //isTyping = true;
 
         messageBox.style.opacity = 0.0f;
         for (float i = 0.0f; i <= 1.0f; i += 0.01f)
@@ -117,7 +135,7 @@ public class DialogueManager : MonoBehaviour
             messageBox.style.opacity = i;
             yield return new WaitForSeconds(0.01f); //adds delay between displaying characters
         }
-        isTyping = false;
+       // isTyping = false;
 
 
     }
@@ -133,6 +151,7 @@ public class DialogueManager : MonoBehaviour
         }
         messageBox.visible = false;
         nameText.visible = false;
+        nameBox.visible = false;
 
     }
 
@@ -141,7 +160,6 @@ public class DialogueManager : MonoBehaviour
         if (currentStory.currentChoices.Count == 0)
             return;
         FindObjectOfType<ChoiceOverlay>().DisplayChoices(currentStory.currentChoices);
-        Debug.Log("There are currently " + currentStory.currentChoices.Count + " choices");
         StartCoroutine(SelectFirstChoice());
     }
     public static void MakeChoice(int choiceIndex)
@@ -153,14 +171,59 @@ public class DialogueManager : MonoBehaviour
         instance.currentStory.ChooseChoiceIndex(choiceIndex);
        // instance.currentStory.currentChoices.Clear();
         instance.ContinueStory();
-        
-
     }
 
     private IEnumerator SelectFirstChoice()
     {
         yield return new WaitForEndOfFrame();
         
+    }
+    private IEnumerator waitAMoment()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+    }
+
+    void inkMethodSetting()
+    {
+
+        currentStory.BindExternalFunction("hasCoffee", (bool status) =>
+        {
+            missionManager.missionInProgress = status;
+
+        });
+
+        currentStory.BindExternalFunction("startClass", (string hi) =>
+        {
+            missionManager.ClassNumber++;
+            classScene.SetActive(true);
+        });
+        currentStory.BindExternalFunction("endClass", (string hi) =>
+        {
+
+            missionManager.classTime = false;
+            //currentStory.variablesState["classTime"] = missionManager.classTime;
+
+            classScene.SetActive(false);
+        });
+        currentStory.BindExternalFunction("angryProfSprite", (string hi) =>
+        {
+            //classScene.SetActive(false);
+            FindObjectOfType<professorScript>().AngrySprite();
+            //professorScript.AngrySprite();
+        });
+        currentStory.BindExternalFunction("casualProfSprite", (string hi) =>
+        {
+            //classScene.SetActive(false);
+            FindObjectOfType<professorScript>().NormalSprite();
+        });
+        currentStory.BindExternalFunction("TriggerBossBattle", (string hi) =>
+        {
+            StartCoroutine(waitAMoment());
+
+            SceneManager.LoadScene("ProfessorBattle");
+            
+        });
     }
 
 }

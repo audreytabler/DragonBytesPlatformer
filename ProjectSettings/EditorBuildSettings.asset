@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dialogue_Scene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Start_Menu.unity
     guid: 6e06aade72191924397593d9eafad78a
+  - enabled: 1
+    path: Assets/Scenes/Platformer_Scene.unity
+    guid: 7e06b5dbd89c6d646a1a690228cb5104
+  - enabled: 1
+    path: Assets/Scenes/ProfessorBattle.unity
+    guid: 3d0f5b1fa3f6ba94abcfeac9c2060358
+  - enabled: 1
+    path: Assets/Scenes/EndCredits.unity
+    guid: b0f444b28951c1a4987c1b16f0473243
   m_configObjects: {}

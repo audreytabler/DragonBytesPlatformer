@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using UnityEditor;
-using UnityEditor.VersionControl;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
@@ -38,8 +38,7 @@ public class DialogueUIScript : MonoBehaviour
 
     //UI Stuff
 
-    [SerializeField]
-    public PrefabAssetType ChoiceOverlayHere;
+
 
     public VisualElement nameBox;
     public Label nameText;

@@ -1,5 +1,7 @@
 
 VAR charName = "Taco"
+EXTERNAL hasCoffee(status)
+
 Hello there! I'm Tacomarious, or Taco for short. 
 
 Would you like to order a drink? ->drinkYN
@@ -21,8 +23,10 @@ Would you like to order a drink? ->drinkYN
     +mocha -> serve("mocha")
     +brewed coffee -> serve("coffee")
     +tea -> serve("tea")
+    
     =serve(drinkType)
     aaand here's your {drinkType}! Enjoy!
+    ~ hasCoffee(true)
     -->END
     
     ==iced
@@ -31,10 +35,11 @@ Would you like to order a drink? ->drinkYN
     +mocha -> serve("mocha")
     +brewed coffee -> serve("coffee")
     +tea -> serve("tea")
+    
     =serve(drinkType)
     aaand here's your iced {drinkType}! Enjoy!
-    -->END
-    
+    ~ hasCoffee(true)
+    --> DONE
     
     
 ==no

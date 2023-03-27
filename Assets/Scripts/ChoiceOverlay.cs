@@ -38,12 +38,15 @@ public class ChoiceOverlay : MonoBehaviour
 
         //choice1.style.opacity.ps
 
+       
+        if (!DialogueManager.GetInstance().dialogueIsPlaying) { 
+            //when messagebox clicked, set chatbox
+            choice1.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(0));
+            choice2.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(1));
+            choice3.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(2));
+            choice4.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(3));
+        }
 
-        //when messagebox clicked, set chatbox
-        choice1.RegisterCallback<ClickEvent>(ev =>DialogueManager.MakeChoice(0));
-        choice2.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(1));
-        choice3.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(2));
-        choice4.RegisterCallback<ClickEvent>(ev => DialogueManager.MakeChoice(3));
 
     }
     IEnumerator fadeIn()

@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
     Rigidbody2D rb;
+    public Animator animator;
+   
 
     private void Start()
     {
@@ -18,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         horizontalMove = Input.GetAxisRaw("Horizontal") *movespeed;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -37,5 +39,14 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump); //passes horiziontal movement, something, and whether or not we are jumping
         jump = false;
         
+    }
+
+    private void Flip()
+    {
+
+        // Multiply the player's x local scale by -1.
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
