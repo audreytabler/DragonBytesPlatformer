@@ -25,7 +25,7 @@ public class DialogueTrigger : MonoBehaviour
     }
     private void Update()
     {
-        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        if (playerInRange && !(DialogueManager.GetInstance().dialogueIsPlaying) && !DialogueManager.choicesDisplayed)
         {
             visualCue.SetActive(true);
             if (Input.GetButtonDown("Fire1"))//fire1 is T

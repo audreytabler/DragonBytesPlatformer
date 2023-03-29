@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
     private string[] choicesText;
     public bool dialogueIsPlaying { get; private set; }
+    public static bool choicesDisplayed = false;
+
 
     public VisualElement nameBox;
     public Label nameText;
@@ -94,7 +96,7 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory()
     {
-        if (!isTyping)
+        if (!isTyping && !choicesDisplayed)
         {
             if (currentStory.canContinue)
             {
@@ -159,13 +161,14 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.currentChoices.Count == 0)
             return;
+        choicesDisplayed = true;
         FindObjectOfType<ChoiceOverlay>().DisplayChoices(currentStory.currentChoices);
         StartCoroutine(SelectFirstChoice());
     }
     public static void MakeChoice(int choiceIndex)
     {
-        Debug.Log("Selected choice "+choiceIndex);
         FindObjectOfType<ChoiceOverlay>().hideAll();
+        choicesDisplayed = false;
 
 
         instance.currentStory.ChooseChoiceIndex(choiceIndex);
@@ -200,7 +203,7 @@ public class DialogueManager : MonoBehaviour
         });
         currentStory.BindExternalFunction("endClass", (string hi) =>
         {
-
+            ContinueStory();
             missionManager.classTime = false;
             //currentStory.variablesState["classTime"] = missionManager.classTime;
 
